@@ -452,3 +452,61 @@ void goldbach(int l,int r){
     }
 }
 ```
+## 单词反转
+```c++
+void reserve_word(){
+	char a[505];
+	gets(a);
+	char *l=a,*r=a;
+	int len=strlen(a);
+	a[len]=' ';
+    a[len+1]=0;
+	while(*r!=0){
+		if(*r == ' '){
+			for(char *p=r-1;p>=l;p--){//反向遍历输出单词 
+				cout<<*p;
+			}
+			l=r+1;
+            if(*(r+1)!=0){//最后一个单词后面不用输出空格 
+                cout<<" ";
+            }
+		}
+        r++;
+	}
+	return;
+}
+```
+## 字符串判等
+```c++
+void string_is_equal(){
+    char a[100]={0},b[100]={0};
+    gets(a);
+    gets(b);
+    char *pa=a,*pb=b;
+    while (*pa!='\0' || *pb!='\0')
+    {
+        while(*pa==' ') pa++;
+        while(*pb==' ') pb++;
+        if (*pa==*pb || *pa+32==*pb || *pa==*pb+32)
+        {
+            pa++;
+            pb++;            
+        }else
+        {
+            cout<<"no"<<endl;
+            return;
+        }
+    }
+    cout<<"yes"<<endl;
+}
+```
+## 数字输出
+```c++
+int main(){
+    int a;
+    cout<<"请输入一个数字：";
+    cin>>a;
+    cout<<"输入的数字是："<<a<<endl;
+    cout<<"输入的数字是：\n"<<a<<endl;
+}
+```

@@ -80,6 +80,16 @@ void fopen(const char *filename){
     // }
     // cin.clear();
 
+    //方法五 使用fscanf按行读取，无需刷新输出流
+    // FILE *fin=fopen(filename,"r");
+    // FILE *fout=fopen("C.txt","w");
+    // while(fscanf(fin,"%s",a)!=EOF)
+    // {
+    // 	fprintf(fout,"%s",a);
+	// }
+    // fclose(fin);
+    // fclose(fout);
+
     fclose(stdin);
     fclose(stdout);
 }
@@ -508,5 +518,159 @@ int main(){
     cin>>a;
     cout<<"输入的数字是："<<a<<endl;
     cout<<"输入的数字是：\n"<<a<<endl;
+}
+```
+## 文件输出平均成绩
+```c++
+void avg_score(){
+    int n=2;
+    int xhs[n]={};
+    char names[n][20]={};
+    int scores[n][4]={};
+    const char *filename="stud";
+    FILE *fp=fopen(filename,"w");
+    for (int i = 0; i < n; i++)
+    {
+        cin>>xhs[i]>>names[i]>>scores[i][0]>>scores[i][1]>>scores[i][2];
+        scores[i][3]=(scores[i][0]+scores[i][1]+scores[i][2])/3;
+        fprintf(fp,"%d %s %d %d %d %d\n",xhs[i],names[i],scores[i][0],scores[i][1],scores[i][2],scores[i][3]);
+    }
+    fclose(fp);
+}
+```
+## 铺地毯
+```c++
+void blanket(){
+    int n;cin>>n;
+    int arr[n][4]={};
+    for (int i = 0; i < n; i++)
+    {
+        cin>>arr[i][0]>>arr[i][1]>>arr[i][2]>>arr[i][3];
+    }
+    int x,y;cin>>x>>y;
+    for (int i = n-1; i >=0; i--)
+    {
+        if (x>=arr[i][0] && x<=arr[i][0]+arr[i][2] && y>=arr[i][1] && y<=arr[i][1]+arr[i][3])
+        {
+            cout<<i+1<<endl;
+            return;
+        }
+    }
+    cout<<-1<<endl;
+    return;
+}
+```
+## 高精度加减法
+```c++
+void high_precision_add(){
+    string a,b;
+    cin>>a>>b;
+    int flaga=1,flagb=1;
+    if(a[0]=='-'){
+        a.erase(0,1);
+        flaga=-1;
+    }
+    if(b[0]=='-'){
+        b.erase(0,1);
+        flagb=-1;
+    }
+    int isABigger=a.length()>b.length()?1:(a.length()<b.length()?-1:strcmp(a.c_str(),b.c_str()));
+    if((isABigger==-1 && flagb==-1)||(isABigger==1 && flaga==-1)||(flaga*flagb>0&&flaga==-1))//a大且a为负或b大且b为负或均为负数
+        cout<<"-";
+    if (isABigger==-1)
+        swap(a,b);
+    int lena=a.length();
+    int lenb=b.length();
+    int len=max(lena,lenb);
+    int c[len+1]={0};
+    int i=lena-1,j=lenb-1,k=len,jw=0;
+    if(flaga*flagb>0)
+        while (i>=0 || j>=0)
+        {
+            if(i>=0 && j>=0)
+                c[k]=a[i]-'0'+b[j]-'0'+jw;
+            else if(i>=0)
+                c[k]=a[i]-'0'+jw;
+            else if(j>=0)
+                c[k]=b[j]-'0'+jw;
+            jw=c[k]/10;
+            c[k]%=10;
+            i--;
+            j--;
+            k--;
+        }
+    else
+        while (i>=0 || j>=0)
+        {
+            if(i>=0 && j>=0)
+                c[k]=a[i]-'0'-(b[j]-'0')+jw;
+            else if(i>=0)
+                c[k]=a[i]-'0'+jw;
+            else if(j>=0)
+                c[k]=b[j]-'0'+jw;
+            if (c[k]<0)
+            {
+                c[k]+=10;
+                jw=-1;
+            }else
+                jw=0;
+            i--;
+            j--;
+            k--;
+        }
+    c[k]+=jw; 
+    i=0;
+    while(c[i]==0&&i<len)
+        i++;
+    for (; i <= len; i++)
+    {
+        cout<<c[i];
+    }
+    cout<<endl;
+}
+```
+## 高精度乘法
+```c++
+void high_precision_multi(){
+    string a,b;
+    cin>>a>>b;
+    int flaga=1,flagb=1;
+    if(a[0]=='-'){
+        a.erase(0,1);
+        flaga=-1;
+    }
+    if(b[0]=='-'){
+        b.erase(0,1);
+        flagb=-1;
+    }
+    if(flaga*flagb==-1){
+        cout<<"-";
+    }
+    int lena=a.length();
+    int lenb=b.length();
+    int len=max(lena,lenb)*2;
+    int c[len+1]={0};
+    int i=lena-1,j=lenb-1,k=len,jw=0;
+    for (; i >= 0; i--)
+    {
+        k=len-(lena-1-i);
+        for(j=lenb-1; j >= 0; j--){
+            c[k]=(a[i]-'0')*(b[j]-'0')+c[k]+jw;
+            jw=c[k]/10;
+            c[k]%=10;
+            k--;
+        }
+    }
+    if(jw>0){
+        c[k]=jw;
+    }
+    i=0;
+    while(c[i]==0 && i<len)
+        i++;
+    for (; i <= len; i++)
+    {
+        cout<<c[i];
+    }
+    cout<<endl;
 }
 ```

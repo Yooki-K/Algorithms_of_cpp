@@ -674,3 +674,48 @@ void high_precision_multi(){
     cout<<endl;
 }
 ```
+## 整数去重
+```c++
+void int_unique(){
+    int n;
+    cin>>n;//输入数组大小
+    int a[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin>>a[i];//输入数组元素
+    }
+    for (int i = 0; i < n; i++)
+    {
+        bool isExist=false;//判断a[i]是否在前面出现过
+        for(int j=0;j<i;j++){
+            if(a[i]==a[j]){
+                isExist=true;
+                break;
+            }
+        }
+        if(isExist==false)//如果a[i]没在前面出现过，则输出a[i]
+            cout<<a[i]<<" ";
+    }
+    cout<<endl;
+}
+```
+## 数组逆序存储
+```c++
+void reserve_arr(){
+    const int n=5;
+    int a[n];
+    for (int i = 0; i < n; i++)
+        cin>>a[i];
+    int *lp=a,*rp=a+n-1;
+    while (lp<rp)
+    {
+        int temp=*lp;
+        *lp=*rp;
+        *rp=temp;
+        lp++;
+        rp--;
+    }
+    for(int i=0;i<n;i++)
+        cout<<a[i]<<" ";
+}
+```

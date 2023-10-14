@@ -739,3 +739,38 @@ void romate_img(){
     return ;
 }
 ```
+###约瑟夫问题（猴子）
+```c++
+struct node{
+    int num;
+    node *next;
+    node(){}
+    node(int n){num=n;}
+};
+int josephus(int n,int m){
+    node *head=new node(1);
+    node *p=head;
+    for (int i = 2; i <= n; i++)
+    {
+        node *t=new node(i);
+        p->next=t;
+        p=p->next;
+    }
+    p->next=head;
+    p=head;
+    while (p->next!=p)
+    {
+        for (int i = 1; i < m-1; i++)
+        {
+            p=p->next;
+        }
+        node *t=p->next;
+        p->next=t->next;
+        delete t;
+        p=p->next;
+    }
+    int res=p->num;
+    delete p;
+    return res;
+}
+```

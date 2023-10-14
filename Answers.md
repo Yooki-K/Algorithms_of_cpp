@@ -739,7 +739,7 @@ void romate_img(){
     return ;
 }
 ```
-###约瑟夫问题（猴子）
+### 约瑟夫问题（猴子）
 ```c++
 struct node{
     int num;

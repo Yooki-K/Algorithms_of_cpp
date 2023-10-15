@@ -774,3 +774,28 @@ int josephus(int n,int m){
     return res;
 }
 ```
+### 学生排序
+```c++
+struct Student {
+    string name;
+    int m;
+};
+int cmpSty(Student x,Student y) {
+    if(x.m == y.m) return x.name < y.name;
+    return x.m > y.m;
+}
+void student_sort() {
+    Student student[100];
+    int n;cin>>n;
+    for(int i=0;i<n;++i){
+        cin>>student[i].name;
+        cin>>student[i].m;
+    }
+    sort(student, student+n, cmpSty);
+    for(int i=0;i<n;++i){
+        cout<<student[i].name<<" ";
+        cout<<student[i].m<<endl;
+    }
+}
+
+```

@@ -799,3 +799,19 @@ void student_sort() {
 }
 
 ```
+### 小球下落
+```c++
+void ballDrop()
+{
+	double h;
+	cin >> h;
+	double s;
+	for (int i=1; i<=10; i++){
+		s += 1.5 * h;
+		h *= 0.5; 
+	} 
+	cout << s - h << endl;
+	cout << h << endl;
+	return;
+}
+```

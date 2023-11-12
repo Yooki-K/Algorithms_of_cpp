@@ -815,3 +815,23 @@ void ballDrop()
 	return;
 }
 ```
+### 寻找素数对
+```c++
+bool isPrime(int num){
+     int tmp=sqrt(num);
+     for(int i=2;i<=tmp;i++)
+        if(num%i==0)
+          return 0;
+     return 1;
+}
+void primePair(){
+    int n;
+    cin>>n;
+    for(int i=5;i<=n;i+=2){
+        bool flag=isPrime(i);
+        if(flag&&isPrime(i-2))
+                cout<<i-2<<" "<<i<<endl;
+    }
+    return;
+}
+```

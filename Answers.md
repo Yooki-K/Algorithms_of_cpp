@@ -1,4 +1,4 @@
-# c++
+![image](https://github.com/Yooki-K/Algorithms_of_cpp/assets/61906563/8b398196-96c1-4ca5-86db-cf184b5d5f2f)# c++
 ## 万能头文件
 ```c++
 #include<bits/stdc++.h>
@@ -849,4 +849,35 @@ y与x一样的，最后y = 0000 0100
 z = x|y<<1
 先计算y<<1 = 0000 1000
 z = 0000 0100|0000 1000 = 0000 1100 = 12
+```
+### 机器翻译
+```c++
+void machine_translation(){
+    int m,n,res=0,nn=0;
+    cin>>m>>n;
+    int arr[1001]={0};
+    for(int i=0;i<n;i++){
+        int t;
+        cin>>t;
+        if(arr[t]==0){
+            ++res;
+            if(nn<m){
+                ++nn;
+                arr[t]=nn;
+            }else{
+                int temp=0;
+                for(int j=0;j<=1000;j++){
+                    if(arr[j]>=1){
+                        --arr[j];
+                        ++temp;
+                        if(temp==m) break;
+                    }
+                }
+                arr[t]=m;
+            }
+        }
+    }
+    cout<<res<<endl;
+    return;
+}
 ```

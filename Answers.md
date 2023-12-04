@@ -739,7 +739,7 @@ void romate_img(){
     return ;
 }
 ```
-### 约瑟夫问题（猴子）
+## 约瑟夫问题（猴子）
 ```c++
 struct node{
     int num;
@@ -774,7 +774,7 @@ int josephus(int n,int m){
     return res;
 }
 ```
-### 学生排序
+## 学生排序
 ```c++
 struct Student {
     string name;
@@ -799,7 +799,7 @@ void student_sort() {
 }
 
 ```
-### 小球下落
+## 小球下落
 ```c++
 void ballDrop()
 {
@@ -815,7 +815,7 @@ void ballDrop()
 	return;
 }
 ```
-### 寻找素数对
+## 寻找素数对
 ```c++
 bool isPrime(int num){
      int tmp=sqrt(num);
@@ -835,7 +835,7 @@ void primePair(){
     return;
 }
 ```
-### 位运算推导
+## 位运算推导
 ```C++
 2 = 0000 0010
 0x33 = 0011 0011
@@ -850,7 +850,7 @@ z = x|y<<1
 先计算y<<1 = 0000 1000
 z = 0000 0100|0000 1000 = 0000 1100 = 12
 ```
-### 机器翻译
+## 机器翻译
 ```c++
 void machine_translation(){
     int m,n,res=0,nn=0;

@@ -1,4 +1,4 @@
-![image](https://github.com/Yooki-K/Algorithms_of_cpp/assets/61906563/8b398196-96c1-4ca5-86db-cf184b5d5f2f)# c++
+# c++
 ## 万能头文件
 ```c++
 #include<bits/stdc++.h>

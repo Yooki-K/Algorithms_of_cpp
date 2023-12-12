@@ -881,3 +881,63 @@ void machine_translation(){
     return;
 }
 ```
+## 流感传染
+```c++
+void flue()
+{
+    int w,y=0;
+    char x[105][105];
+    for (int i = 1; i <= w; i++)
+        for (int j = 1; j <= w; j++)
+        {
+            cin >> x[i][j];
+            if(x[i][j]=='@') y++; //第一天
+        }
+    int o;
+    cin >> o;
+    o--;//第一天已经计算过
+    while (o)
+    {
+        for (int i = 1; i <= w; i++)
+        {
+            for (int j = 1; j <= w; j++)
+            {
+                if (x[i][j] == '@'||x[i][j] == '#') continue;
+                else if (x[i + 1][j] == '@' || x[i][j + 1] == '@' || x[i - 1][j] == '@' || x[i][j - 1] == '@')
+                {
+                    y++;
+                    x[i][j] = '%';
+                }
+            }
+        }
+        for (int i = 1; i <= w; i++)
+            for (int j = 1; j <= w ; j++)
+                if (x[i][j] == '%')
+                    x[i][j] = '@';
+        o--;
+    }
+    cout<<y<<endl;
+}
+```
+## 上台阶
+```c++
+int dg(int n, int* arr){
+    if(n<=0) return 0;
+    else if(n==1) return 1;
+    else if(n==2) return 2;
+    else if(n==3) return 4;
+    if(arr[n]==0)
+        arr[n]=dg(n-1,arr)+dg(n-2,arr)+dg(n-3,arr);
+    return arr[n];
+}
+int main()
+{
+    int n;
+    int arr[100];
+    while(cin>>n){
+        if(n==0)return 0;
+        cout<<dg(n,arr)<<endl;
+    }
+    return 0;
+}
+```

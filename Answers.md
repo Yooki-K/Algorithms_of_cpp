@@ -941,3 +941,63 @@ int main()
     return 0;
 }
 ```
+## 走不同的字符
+```c++
+char a[25][25];
+int r,c;
+bool s[26]={0};
+int dfs(int i,int j,int cur){
+    if(i<0||i>=r||j<0||j>=c||s[a[i][j]-'A']){
+        return cur;
+    }
+    cur++;
+    s[a[i][j]-'A']=true;
+    int r1 = dfs(i+1,j,cur);
+    int r2 = dfs(i-1,j,cur);
+    int r3 = dfs(i,j+1,cur);
+    int r4 = dfs(i,j-1,cur);
+    s[a[i][j]-'A']=false;
+    return max(max(r1,r2),max(r3,r4));
+
+}
+int main(){
+    cin>>r>>c;
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            cin>>a[i][j];
+        }
+    }
+    cout<<dfs(0,0,0)<<endl;
+    return 0;
+}
+```
+## 求最大值之外的总和
+```c++
+void sum_without_max()
+{
+    int n;
+    cin >> n;
+    int arr[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+    int maxv = arr[0];
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] > maxv)
+        {
+            maxv = arr[i];
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] < maxv)
+        {
+            sum += arr[i];
+        }
+    }
+    cout << sum << endl;
+}
+```

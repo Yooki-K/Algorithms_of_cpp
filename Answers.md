@@ -509,6 +509,57 @@ void string_is_equal(){
     }
     cout<<"yes"<<endl;
 }
+void string_is_equal2(){
+    char a[100]={0},b[100]={0};
+    char aa[100]={0},bb[100]={0};
+    gets(a);
+    gets(b);
+    int j=0;
+    for (int i=0; i < strlen(a); i++)
+    {
+        if (a[i]>='A' && a[i]<='Z'){
+            aa[j]+=32;
+        }
+        else if (a[i]==' '){
+            continue;
+        }
+        else{
+            aa[j]=a[i];
+        }
+        j++;
+    }
+    aa[j]='\0';
+    j=0;
+    for (int i=0; i < strlen(b); i++)
+    {
+        if (b[i]>='A' && b[i]<='Z'){
+            b[j]+=32;
+        }
+        else if (b[i]==' '){
+            continue;
+        }
+        else{
+            bb[j]=b[i];
+        }
+        j++;
+    }
+    bb[j]='\0';
+    if(strlen(aa)!=strlen(bb)){
+        cout<<"no"<<endl;
+        return ;
+    }
+    for (int i = 0; i < strlen(aa); i++)
+    {
+        if (aa[i]!=bb[i])
+        {
+            cout<<"no"<<endl;
+            return ;
+        }
+        
+    }
+    cout<<"yes"<<endl;
+    return ;
+}
 ```
 ## 数字输出
 ```c++

@@ -1135,7 +1135,7 @@ void printfList(node *head)
     cout << endl;
 }
 ```
-### 约瑟夫问题(简单版)
+### 约瑟夫问题
 ```c++
 //猴子
 void monkeyKing(){
@@ -1159,7 +1159,7 @@ void monkeyKing(){
 }
 
 ```
-### 约瑟夫问题（简单版）
+### 约瑟夫问题(简单版)
 ```c++
 struct node{
     int num;

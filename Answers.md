@@ -790,41 +790,6 @@ void romate_img(){
     return ;
 }
 ```
-## 约瑟夫问题（猴子）
-```c++
-struct node{
-    int num;
-    node *next;
-    node(){}
-    node(int n){num=n;}
-};
-int josephus(int n,int m){
-    node *head=new node(1);
-    node *p=head;
-    for (int i = 2; i <= n; i++)
-    {
-        node *t=new node(i);
-        p->next=t;
-        p=p->next;
-    }
-    p->next=head;
-    p=head;
-    while (p->next!=p)
-    {
-        for (int i = 1; i < m-1; i++)
-        {
-            p=p->next;
-        }
-        node *t=p->next;
-        p->next=t->next;
-        delete t;
-        p=p->next;
-    }
-    int res=p->num;
-    delete p;
-    return res;
-}
-```
 ## 学生排序
 ```c++
 struct Student {
@@ -932,6 +897,36 @@ void machine_translation(){
     return;
 }
 ```
+## 求最大值之外的总和
+```c++
+void sum_without_max()
+{
+    int n;
+    cin >> n;
+    int arr[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+    int maxv = arr[0];
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] > maxv)
+        {
+            maxv = arr[i];
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] < maxv)
+        {
+            sum += arr[i];
+        }
+    }
+    cout << sum << endl;
+}
+```
 ## 流感传染
 ```c++
 void flue()
@@ -1022,33 +1017,255 @@ int main(){
     return 0;
 }
 ```
-## 求最大值之外的总和
+## 链表操作
 ```c++
-void sum_without_max()
+struct node
 {
-    int n;
+    int data=-1;
+    node *pre = nullptr, *next = nullptr;
+    node(int data=-1) {this->data = data;}
+    node(int data, node *pre, node *next){
+        this->data = data;
+        this->pre = pre;
+        this->next = next;
+    }
+
+};
+
+// 删除第i个结点（从0开始算），并返回该结点的后继结点，如果没有找到返回nullptr
+node *removeByIndex(node *head, int i)
+{
+    node *p = head, *res = nullptr;
+    int j = 0;
+    while (j < i && p->next != NULL)
+    {
+        p = p->next;
+        j++;
+    } // 执行完循环后，p指向第i号结点
+    if (p == NULL){
+        cout << "未找到位置" << i;
+        return nullptr;
+    }
+    else{
+        if (p->pre != nullptr)p->pre->next = p->next;
+        if (p->next != nullptr)p->next->pre = p->pre;
+        res = p->next;
+        delete p;
+    }
+    return res;
+}
+
+// 删除第一个值为x的结点，并返回该结点的后继结点,如果没有找到返回nullptr
+node *removeByValue(node *head, int x)
+{
+    node *p = head, *res = nullptr;
+    while (p->next != NULL)
+    {
+        if(p->data==x) break;
+        p = p->next;
+    }
+    if(p->data!=x) return nullptr;
+    if (p->pre != nullptr)p->pre->next = p->next;
+    if (p->next != nullptr)p->next->pre = p->pre;
+    res = p->next;
+    delete p;
+    return res;
+}
+
+// 在链表尾部添加一个结点，并返回该结点
+node *push(node *head, int x)
+{
+    node *p = head;
+    while (p->next != NULL)
+    {
+        p = p->next;
+    }
+    node *s = new node();
+    s->data = x;
+    s->pre = p;
+    p->next = s;
+    return s;
+}
+
+// 在第i个结点（从0开始算）之前插入一个结点，并返回该结点
+node* insert(node *head, int i, int x)
+{
+    node *p = head,*s=nullptr;
+    int j = 0;
+    while (p->next != NULL && j < i)
+    {
+        p = p->next;
+        j++;
+    } // 执行完循环后，p指向第i号结点
+    if (p == NULL)
+        cout << "在位置" << i << "未找到数据" << x;
+    else
+    {
+        s = new node(x);
+        s->pre = p->pre;  // 前趋
+        s->next = p;      // 后继
+        if(p->pre!=nullptr)p->pre->next = s; // 前趋的后继
+        p->pre = s;
+    }
+    return s;
+}
+
+// 释放链表
+void deleteList(node *head)
+{
+    node *p = head->next;
+    while (p != nullptr)
+    {
+        node *q = p;
+        p = p->next;
+        delete q;
+    }
+    delete head;
+}
+
+// 打印链表
+void printfList(node *head)
+{
+    node *p = head;
+    while (p != nullptr)
+    {
+        cout << p->data << ' ';
+        p = p->next;
+    }
+    cout << endl;
+}
+```
+### 约瑟夫问题(简单版)
+```c++
+//猴子
+void monkeyKing(){
+    while (1)
+    {
+        int m, n, i = 2;
+        cin >> n >> m;
+        if(n==0&&m==0) break;
+        node *head = new node(1);
+        node *e = nullptr;
+        while (i <= n)
+            e = push(head, i++);
+        e->next = head;
+        head->pre = e;
+        e = head;
+        while (e->next != e)
+            e = removeByIndex(e, m - 1);
+        cout << e->data <<endl;
+        delete e;
+    }
+}
+
+```
+### 约瑟夫问题（简单版）
+```c++
+struct node{
+    int num;
+    node *next;
+    node(){}
+    node(int n){num=n;}
+};
+//猴子
+int josephus(int n,int m){
+    node *head=new node(1);
+    node *p=head;
+    for (int i = 2; i <= n; i++)
+    {
+        node *t=new node(i);
+        p->next=t;
+        p=p->next;
+    }
+    p->next=head;
+    p=head;
+    while (p->next!=p)
+    {
+        for (int i = 1; i < m-1; i++)
+        {
+            p=p->next;
+        }
+        node *t=p->next;
+        p->next=t->next;
+        delete t;
+        p=p->next;
+    }
+    int res=p->num;
+    delete p;
+    return res;
+}
+```
+### 删除链表中元素
+```c++
+// 删除链表中的元素
+void deleteNumber(){
+    int n;cin>>n;
+    node *head = new node();
+    while (n--)
+    {
+        int x;cin>>x;
+        push(head,x);
+    }
+    int k;cin>>k;
+    node *p=head->next;
+    while (p!=nullptr){
+        p = removeByValue(p,k);
+    }
+    printfList(head->next);
+    deleteList(head);
+    return;
+}
+```
+### 删除链表中元素(简单版)
+```c++
+#include <iostream>
+using namespace std;
+struct node
+{
+    long d=0;
+    node *pre = NULL, *next = NULL;
+};
+int main()
+{
+    int n, k,t;
     cin >> n;
-    int arr[n];
-    for (int i = 0; i < n; i++)
+    node *head = new node;
+    node *r = head;
+    while (n--)
     {
-        cin >> arr[i];
+        cin>>t;
+        node *p = new node;
+        p->next = NULL;
+        p->d = t;
+        p->pre = r;
+        r->next = p;
+        r = p;
     }
-    int maxv = arr[0];
-    int sum = 0;
-    for (int i = 0; i < n; i++)
+    cin >> k;
+    r = head->next;
+    while (r!=NULL){
+        if (r->d == k){//将等于k的结点删除
+            node *t = r;
+            r->pre->next = r->next;
+            if (r->next != NULL)r->next->pre = r->pre;
+            r = r->next;
+            delete t;
+        }else r = r->next;
+            
+    }
+    node *p = head->next;
+    while (p != NULL)
     {
-        if (arr[i] > maxv)
-        {
-            maxv = arr[i];
-        }
+        cout << p->d << " ";
+        p = p->next;
     }
-    for (int i = 0; i < n; i++)
-    {
-        if (arr[i] < maxv)
-        {
-            sum += arr[i];
-        }
+    cout << endl;
+    node *p = head, *q = NULL;
+    while (p != NULL){
+        q = p;
+        p = p->next;
+        delete q;
     }
-    cout << sum << endl;
+    return 0;
 }
 ```

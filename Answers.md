@@ -611,7 +611,8 @@ void blanket(){
     return;
 }
 ```
-## 高精度加减法
+## 高精度计算
+### 高精度加减法
 ```c++
 void high_precision_add(){
     string a,b;
@@ -680,7 +681,7 @@ void high_precision_add(){
     cout<<endl;
 }
 ```
-## 高精度乘法
+### 高精度乘法
 ```c++
 void high_precision_multi(){
     string a,b;
@@ -723,6 +724,22 @@ void high_precision_multi(){
         cout<<c[i];
     }
     cout<<endl;
+}
+```
+### 高精度除法
+```c++
+// 高精度除法
+bool high_precision_div(string a,int b)
+{
+    int lena = a.length();
+    int c[200]={0}; // int c[lena + 1] = {0};
+    int res=0;
+    for (int i = 0; i < lena; i++)
+    {
+        res = (res*10+a[i]-'0')%b;
+    }
+    if(res==0) return 1;
+    return 0;
 }
 ```
 ## 整数去重

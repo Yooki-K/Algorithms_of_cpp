@@ -1288,34 +1288,44 @@ int main()
 ```
 ## 桶排序
 ```c++
-void bucket_sort(){
-    int n=20,tongNum=6;
+void bucket_sort()
+{
+    int n = 20, tongNum = 6;
     int a[n];
-    long long t = (long long)1<<32;
-    int maxv=t,minv=t-1;
-    for (int i = 0; i < n; i++){
-        cin>>a[i];
-        if(a[i]<minv) minv = a[i];
-        if(a[i]>maxv) maxv = a[i];
+    // 随机生成数组1-100
+    srand(time(0)); // 随机种子
+    for (int i = 0; i < n; i++)
+        a[i] = rand() % 99 + 1;
+    int maxv = 0, minv = 105;
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] < minv)
+            minv = a[i];
+        if (a[i] > maxv)
+            maxv = a[i];
     }
     int tongs[tongNum][n];
-    int nums[tongNum]={0};
-    memset(tongs,0,sizeof(tongs));
-    double range=(maxv-minv)/double(tongNum);
-    for (int i = 0; i < n; i++){
-        int index = a[i]/int(range);
-        int j=nums[index]-1;
-        while(j>=0 && tongs[index][j]>=a[i]){
-            tongs[index][j+1]=tongs[index][j];
+    int nums[tongNum] = {0};
+    memset(tongs, 0, sizeof(tongs));
+    double range = (maxv - minv) / double(tongNum);
+    for (int i = 0; i < n; i++)
+    {
+        int index = a[i] / int(range);
+        if (index >= tongNum)
+            index--;
+        int j = nums[index] - 1;
+        while (j >= 0 && tongs[index][j] >= a[i])
+        {
+            tongs[index][j + 1] = tongs[index][j];
             j--;
         }
-        tongs[index][j+1]=a[i];
+        tongs[index][j + 1] = a[i];
         nums[index]++;
     }
     for (int i = 0; i < tongNum; i++)
-        for(int j=0;j<nums[i];j++)
-            cout<<tongs[i][j]<<" ";
-    cout<<endl;
-    return ;
+        for (int j = 0; j < nums[i]; j++)
+            cout << tongs[i][j] << " ";
+    cout << endl;
+    return;
 }
 ```

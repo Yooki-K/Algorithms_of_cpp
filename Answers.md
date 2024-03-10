@@ -112,6 +112,31 @@ void reverse_string(){
     cout<<endl;
 }
 ```
+## 单词替换
+```c++
+int main()
+{
+    string s[100];
+    string a, b;
+    int i = 0;
+    char t;
+    do
+    {
+        cin >> s[i];
+        i++;
+    } while (getchar() != '\n');
+    cin >> a >> b;
+    for (int j = 0; j < i; j++)
+    {
+        if (s[j] == a)
+        {
+            s[j] = b;
+        }
+        cout << s[j] << ' ';
+    }
+    return 0;
+}
+```
 ## 矩阵转置（指针）
 ```c++
 void transpose_malloc(){

@@ -1059,6 +1059,109 @@ int main(){
     return 0;
 }
 ```
+## 动态规划
+### 摘花生
+```c++
+void zhaihuasheng()
+{
+    int n;
+    cin>>n;
+    for (int k = 0; k < n; k++)
+    {
+        int r, c;
+        cin >> r >> c;
+        int a[r][c];
+        for (int i = 0; i < r; i++)
+            for (int j = 0; j < c; j++)
+                cin >> a[i][j];
+        for (int i = 0; i < r; i++)
+            for (int j = 0; j < c; j++)
+                if (i == 0 && j == 0)
+                    continue;
+                else if (i == 0)
+                    a[i][j] += a[i][j - 1];
+                else if (j == 0)
+                    a[i][j] += a[i - 1][j];
+                else
+                    a[i][j] += max(a[i - 1][j], a[i][j - 1]);
+        cout<<a[r - 1][c - 1]<<endl;
+    }
+    return ;
+}
+```
+### 三角形最佳路径问题
+```c++
+void trianglePath(){
+    int n;
+    cin >> n;
+    int a[n][n]={0};
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= i; j++)
+            cin >> a[i - 1][j - 1];
+    int r=0;
+    for (int i = 1; i < n; i++)
+    {
+        a[i][0] += a[i - 1][0];
+        for (int j = 1; j < i; j++)
+            a[i][j] += max(a[i - 1][j], a[i - 1][j - 1]);
+        a[i][i] += a[i - 1][i - 1];
+    }
+    for(int i=0;i<n;i++)
+        r=max(r,a[n-1][i]);
+    cout << r << endl;
+    return;    
+}
+```
+### 拦截导弹
+```c++
+void stopMissile()
+{
+    int n;
+    cin >> n;
+    int a[101], f[101]={0};
+    int m = -1;
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+        f[i]=1;
+    }
+    for(int i=0;i<n;i++){
+        for(int j=i-1;j>=0;j--){
+            if(a[i]<=a[j]){
+                f[i] = max(f[i],f[j]+1);
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        m = max(m,f[i]);
+    }
+    cout << m << endl;
+    return ;
+}
+```
+### 最大上升子序列之和
+```c++
+void maxUpSum(){
+    int n;
+    cin >> n;
+    int b[n],dp[n]={0};
+    for (int i = 0; i < n; i++)  
+        cin >> b[i];
+    for (int i = 0; i <n; i++){
+        dp[i]=b[i];
+        for(int j=0;j<i;j++){
+            if(b[j]<b[i]){
+                dp[i]=max(dp[i],dp[j]+b[i]);
+            }
+        }
+    }
+    int r=-1;
+    for(int i=0;i<n;i++)
+        r=max(r,dp[i]);
+    cout<<r<<endl;
+    return ;    
+}
+```
 ## 链表操作
 ```c++
 struct node

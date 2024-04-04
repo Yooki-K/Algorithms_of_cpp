@@ -35,6 +35,61 @@ int reverse_(int a){
     return b;
 }
 ```
+## 我家的门牌号
+```c++
+void menpaihao()
+{
+    int n,m=0;
+    cin>>n;
+    for(int i=1;;i++){
+        m+=i;
+        for(int j=1;j<=i;j++){
+            if(m-j-2*j==n){//m表示所有门牌号之和，j表示我家门牌号
+                cout<<j<<" "<<i;
+                return ;
+            }
+        }
+    }
+    return ;
+ }
+```
+## 笨小猴
+```c++
+bool isPrime(int n)
+{
+    if(n<2)
+        return false;
+    for(int i=2;i*i<=n;i++)
+    {
+        if(n%i==0)
+            return false;
+    }
+    return true;
+}
+int main()
+{
+    string s;
+    cin >> s;
+    int n[30]={0};
+    for(int i=0;i<s.size();i++)
+    {
+        n[s[i]-'a']++;
+    }
+    int maxn = 0,minn=105;
+    for(int i=0;i<26;i++)
+    {
+        if(n[i]>maxn)
+            maxn = n[i];
+        if(n[i]<minn && n[i]!=0)
+            minn = n[i];
+    }
+    if(isPrime(maxn-minn))
+        cout << "Lucky Word" << endl << maxn-minn << endl;
+    else
+        cout << "No Answer" << endl << 0 << endl;
+    return 0;
+ }
+```
 ## 开根号嵌套
 ```c++
 //sqrt(n+sqrt(n-1+sqrt(n-2+...+sqrt(2+sqrt(1+x)))))

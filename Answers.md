@@ -1217,6 +1217,54 @@ void maxUpSum(){
     return ;    
 }
 ```
+### 找零钱
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n, t;
+    cin >> n >> t;
+    int v[105] = {0};
+    int c[105] = {0};
+    int f[105*105+10000];//店主找i元钱所用的最小钱数
+    int g[105*105+10000];//John找i元钱所用的最小钱数 
+    for (int i = 1; i <= n; ++i)
+        cin >> v[i];
+    int sum=0, max_=0;
+    for (int i = 1; i <= n; ++i){
+        cin >> c[i];
+        sum += c[i]*v[i];
+        max_ = max(max_, v[i]*v[i]);
+    }
+    if(sum < t){
+        cout << -1;
+        return 0;
+    }
+    memset(f, 0x3f, sizeof(f));
+    memset(g, 0x3f, sizeof(g));
+    f[0]=0,g[0]=0;
+    for (int i = 1; i <= n; ++i)
+        for (int j = v[i]; j<=max_; ++j)
+            g[j] = min(g[j], g[j-v[i]]+1);
+    for(int i = 1; i <= n; ++i){
+        for (int j = 1; j <= c[i]; j++){
+            for (int k = t+max_; k >= j*v[i]; --k)
+                f[k] = min(f[k], f[k-j*v[i]]+j);
+            c[i] -= j;
+        }
+        if(c[i])
+            for (int k = t+max_; k >= c[i]*v[i]; --k)
+                f[k] = min(f[k], f[k-c[i]*v[i]]+c[i]);
+    }
+    int ans=0x3f3f3f3f;
+    for (int i=t;i<=t+max_;i++)
+        ans=min(ans, f[i]+g[i-t]);
+    cout<<(ans==0x3f3f3f3f?-1:ans)<<endl;
+    return 0;
+}
+
+```
 ## 链表操作
 ```c++
 struct node

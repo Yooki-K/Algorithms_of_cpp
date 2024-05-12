@@ -598,7 +598,7 @@ void string_is_equal2(){
     for (int i=0; i < strlen(a); i++)
     {
         if (a[i]>='A' && a[i]<='Z'){
-            aa[j]+=32;
+            aa[j]=a[i]+32;
         }
         else if (a[i]==' '){
             continue;
@@ -613,7 +613,7 @@ void string_is_equal2(){
     for (int i=0; i < strlen(b); i++)
     {
         if (b[i]>='A' && b[i]<='Z'){
-            b[j]+=32;
+            bb[j]=b[i]+32;
         }
         else if (b[i]==' '){
             continue;
@@ -624,20 +624,10 @@ void string_is_equal2(){
         j++;
     }
     bb[j]='\0';
-    if(strlen(aa)!=strlen(bb)){
+    if(strcmp(aa,bb)!=0){
         cout<<"no"<<endl;
-        return ;
-    }
-    for (int i = 0; i < strlen(aa); i++)
-    {
-        if (aa[i]!=bb[i])
-        {
-            cout<<"no"<<endl;
-            return ;
-        }
-        
-    }
-    cout<<"yes"<<endl;
+    }else
+        cout<<"yes"<<endl;
     return ;
 }
 ```

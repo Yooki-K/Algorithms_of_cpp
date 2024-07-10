@@ -24,7 +24,7 @@ int fbn_(int k){
 }
 ```
 ## 图像模糊
-```
+```c++
 int main()
 {
     int n,m;

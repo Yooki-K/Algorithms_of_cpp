@@ -1584,3 +1584,63 @@ void bucket_sort()
     return;
 }
 ```
+## 快速排序
+```c++
+struct stu
+{
+    int k, b, c, s, i;
+}a[100];
+bool isLess(stu x, stu y)
+{
+    if (x.k + x.b + x.c == y.k + y.b + y.c)
+    {
+        if (x.k == y.k)
+        {
+            return x.i < y.i;
+        }
+        return x.k > y.k;
+    }
+    return x.k + x.b + x.c > y.k + y.b + y.c;
+}
+void qsort(int left, int right)
+{
+    if (left >= right)
+        return;
+    int l = left, r = right;
+    stu pivot = a[l];
+    while (l < r)
+    {
+        while (l<r && isLess(pivot,a[r]))
+        {
+            r--;
+        }
+        a[l] = a[r];
+        while (l<r && isLess(a[l],pivot))
+        {
+            l++;
+        }
+        a[r] = a[l];
+    }
+    a[l] = pivot;
+    qsort(left, l-1);
+    qsort(l+1, right);
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i].k >> a[i].b >> a[i].c;
+        a[i].i = i+1;
+        a[i].s = a[i].k + a[i].b + a[i].c;
+    }
+    qsort(0, n - 1);
+    for (int i = 0; i < 5; i++)
+    {
+        cout << a[i].i<<" "<<a[i].s<<endl;
+    }
+    return 0;
+}
+```

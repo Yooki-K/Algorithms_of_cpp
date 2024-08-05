@@ -87,6 +87,71 @@ void menpaihao()
     return ;
  }
 ```
+## QQ账号
+```c++
+int main()
+{
+    map<string, string> ma;
+    int n;
+    cin >> n;
+    char cmd;
+    string user,pwd;
+    for (int i = 0; i < n; i++)
+    {
+        cin>>cmd>>user>>pwd;
+        if (cmd == 'L')//登录
+        {
+            if (ma.find(user) == ma.end())
+            {
+                cout << "ERROR: Not Exist" << endl;
+            }
+            else
+            {
+                if (ma[user] == pwd)
+                {
+                    cout << "Login: OK" << endl;
+                }
+                else
+                {
+                    cout << "ERROR: Wrong PW" << endl;
+                }
+            }
+        }
+        else if (cmd == 'N')//新用户
+        {
+            if (ma.find(user) != ma.end())
+            {
+                cout << "ERROR: Exist" << endl;
+            }
+            else
+            {
+                ma[user] = pwd;
+                cout << "New: OK" << endl;
+            }
+        }
+    }
+    return 0;
+}
+```
+## 统计字符个数
+```c++
+int main()
+{
+    string s;
+    cin>>s;
+    //统计每个字符出现的次数
+    map<char, int> n;
+    for(int i = 0; i < s.size(); i++){
+        n[s[i]]++;
+    }
+    //输出
+    for(map<char, int>::iterator it = n.begin(); it != n.end(); it++){
+        cout<<'['<<it->first<<']'<<" = "<<it->second<<endl;
+    }
+    
+    return 0;
+}
+```
 ## 笨小猴
 ```c++
 bool isPrime(int n)

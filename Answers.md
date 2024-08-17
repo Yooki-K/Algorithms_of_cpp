@@ -467,56 +467,58 @@ void findfirstonly(){
 ```c++
 union sts
 {
-	int e;
-	double s;
-	char d[1001];
-}a[100];
-void unionApply(){
-	int b, p;
-	string c[100];
-	cin>>p>>b;
-    int u=0;
-    for(int i=0;i<p;i++)
+    int e;
+    double s;
+    char d[20];
+} a[100];
+int main()
+{
+    int b, p;
+    string c[100];
+    cin >> p >> b;
+    int u = 0;
+    for (int i = 0; i < p; i++)
     {
-    	cin>>c[i];
-    	if(c[i]=="DOUBLE")
-    	{
-    		cin>>a[i].s;
-		}
-		else
-		{
-			if(c[i]=="INT")
-			{
-				cin>>a[i].e;
-			}
-			else
-			{
-                getchar();//吸收空格
-				gets(a[i].d);
-			}
-		}
-	}
-	int f[b];
-	for(int i=0;i<b;i++)cin>>f[i];
-	for(int i=0;i<b;i++)
-	{
-		if(c[f[i]]=="DOUBLE")
-    	{
-    		printf("%.2f%c",a[i].s,'\n');
-		}
-		else
-		{
-			if(c[f[i]]=="INT")
-			{
-				cout<<a[i].e<<'\n';
-			}
-			else{//!
-                puts(a[i].d);
-                cout<<'\n';
-            } 
-
-		}
-	}
+        cin >> c[i];
+        if (c[i] == "DOUBLE")
+        {
+            cin >> a[i].s;
+        }
+        else
+        {
+            if (c[i] == "INT")
+            {
+                cin >> a[i].e;
+            }
+            else
+            {
+                getchar(); // 吸收空格
+                gets(a[i].d);
+            }
+        }
+    }
+    int f[b];
+    for (int i = 0; i < b; i++)
+        cin >> f[i];
+    for (int i = 0; i < b; i++)
+    {
+        if (c[f[i]] == "DOUBLE")
+        {
+            printf("%.2f%c", a[f[i]].s, '\n');
+        }
+        else
+        {
+            if (c[f[i]] == "INT")
+            {
+                cout << a[f[i]].e << '\n';
+            }
+            else
+            {
+                puts(a[f[i]].d);
+            }
+        }
+    }
+    return 0;
 }
 ```
 ## 字符串旋转多次
@@ -1604,6 +1606,57 @@ int main()
         delete q;
     }
     return 0;
+}
+```
+## 优先队列
+### 第K个最大值
+```c++
+int main(){
+    priority_queue<int>Q;//默认大根堆
+    char r = ' ';
+    do {
+        int t;
+        cin>>t;
+        Q.push(t);
+        r = getchar();
+    }while (r!='\n');
+    int k;
+    cin>>k;
+    while(--k){
+        Q.pop();
+    }
+    cout<<Q.top();
+        return 0;
+}
+```
+### 最小K个数
+```c++
+int main(){
+    vector<int>v;
+    char r = ' ';
+    do {
+        int t;
+        cin>>t;
+        v.push_back(t);
+        r = getchar();
+    }while (r!='\n');
+    int k;
+    cin>>k;
+    priority_queue<int>Q;//默认大根堆
+    for(int i=0;i<v.size();i++){
+
+        if(Q.size()==k){
+            if (v[i]>=Q.top())continue;
+            Q.pop();
+        }
+        Q.push(v[i]);
+    }
+    while (!Q.empty())
+    {
+        cout<<Q.top()<<" ";
+        Q.pop();
+    }
+        return 0;
 }
 ```
 ## 桶排序

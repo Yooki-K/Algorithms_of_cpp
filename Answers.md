@@ -740,7 +740,7 @@ int main()
         cout<<"yes"<<endl;
         return 0;
     }
-    for(int i=0,j=0;i<s1.size()||j<s2.size();++i,++j){
+    for(int i=0,j=0;i<s1.size()||j<s2.size();){
         while (s1[i]==' ') i++;
         while (s2[j]==' ') j++;
         if(toupper(s1[i])!=toupper(s2[j])){

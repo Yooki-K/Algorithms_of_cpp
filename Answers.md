@@ -87,6 +87,66 @@ void menpaihao()
     return ;
  }
 ```
+## 最大疯狂值
+```c++
+int maxDiff(vector<int> &h, int n) {
+	if (n < 2) return h[0];
+	sort(h.begin(), h.end());
+    deque<int> dq;
+
+    dq.push_front(h.back()); // 将最大的高度放入队列
+    h.pop_back();
+
+    bool insert_front = true;
+    bool push_front = true;
+    int i=0,j=n-2,m=0;
+    while (i<j) {
+        if (insert_front) {
+            if(push_front)
+                dq.push_front(h[i]);
+            else
+                dq.push_back(h[i]);
+            i++;
+        } else {
+            if(push_front)
+                dq.push_front(h[j]);
+            else
+                dq.push_back(h[j]);
+            j--;
+        }
+        push_front = !push_front;
+        m++;
+        if (m%2==0)
+            insert_front = !insert_front;
+    }
+    if(i==j)
+    {
+        if(abs(h[i]-dq.front()) > abs(h[i]-dq.back()))
+            dq.push_front(h[i]);
+        else
+            dq.push_back(h[i]);
+    }
+    int madness = 0;
+    for (size_t i = 1; i < dq.size(); ++i) {
+        madness += std::abs(dq[i] - dq[i - 1]);
+    }
+    return madness;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int> h;
+    for(int i=0;i<n;++i)
+    {
+        int x;
+        cin>>x;
+        h.push_back(x);
+    }
+    cout<<maxDiff(h,n)<<endl;
+    return 0;
+}
+```
 ## QQ账号
 ```c++
 int main()

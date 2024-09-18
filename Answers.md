@@ -1282,6 +1282,7 @@ void sum_without_max()
 void flue()
 {
     int w,y=0;
+    cin>>w;
     char x[105][105];
     for (int i = 1; i <= w; i++)
         for (int j = 1; j <= w; j++)
